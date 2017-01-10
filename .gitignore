@@ -48,7 +48,6 @@ Temporary Items
 NS_OrdersSystem/bin/Release/NS_OrdersSystem.vshost.application
 NS_OrdersSystem/bin/Release/NS_OrdersSystem.vshost.application
 NS_OrdersSystem/bin/Release/NS_OrdersSystem.vshost.exe.manifest
-
 NS_OrdersSystem/bin/Release/app.publish/NS_OrdersSystem.exe
 NS_OrdersSystem/bin/Release/NS_OrdersSystem.exe
 NS_OrdersSystem/bin/Release/NS_OrdersSystem.pdb
@@ -66,3 +65,4 @@ NS_OrdersSystem/bin/Release/app.publish/Application Files/NS_OrdersSystem_1_0_0_
 NS_OrdersSystem/bin/Release/app.publish/Application Files/NS_OrdersSystem_1_0_0_6/NS_OrdersSystem.exe.deploy
 NS_OrdersSystem/bin/Release/app.publish/Application Files/NS_OrdersSystem_1_0_0_6/NS_OrdersSystem.exe.manifest
 NS_OrdersSystem/bin/Release/app.publish/Application Files/NS_OrdersSystem_1_0_0_6/System.Windows.Interactivity.dll.deploy
+NS_OrdersSystem.v12.suo

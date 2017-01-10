@@ -7,6 +7,7 @@ C:\Users\Henry\Documents\Code Proyects\NS_OrdersSystem\NS_OrdersSystem\bin\Relea
 C:\Users\Henry\Documents\Code Proyects\NS_OrdersSystem\NS_OrdersSystem\bin\Release\System.Windows.Interactivity.dll
 C:\Users\Henry\Documents\Code Proyects\NS_OrdersSystem\NS_OrdersSystem\bin\Release\MahApps.Metro.pdb
 C:\Users\Henry\Documents\Code Proyects\NS_OrdersSystem\NS_OrdersSystem\bin\Release\MahApps.Metro.xml
+C:\Users\Henry\Documents\Code Proyects\NS_OrdersSystem\NS_OrdersSystem\obj\Release\NS_OrdersSystem.csprojResolveAssemblyReference.cache
 C:\Users\Henry\Documents\Code Proyects\NS_OrdersSystem\NS_OrdersSystem\obj\Release\MainWindow.baml
 C:\Users\Henry\Documents\Code Proyects\NS_OrdersSystem\NS_OrdersSystem\obj\Release\Views\OrderView.baml
 C:\Users\Henry\Documents\Code Proyects\NS_OrdersSystem\NS_OrdersSystem\obj\Release\Views\UserView.baml
@@ -23,4 +24,3 @@ C:\Users\Henry\Documents\Code Proyects\NS_OrdersSystem\NS_OrdersSystem\obj\Relea
 C:\Users\Henry\Documents\Code Proyects\NS_OrdersSystem\NS_OrdersSystem\obj\Release\NS_OrdersSystem.application
 C:\Users\Henry\Documents\Code Proyects\NS_OrdersSystem\NS_OrdersSystem\obj\Release\NS_OrdersSystem.exe
 C:\Users\Henry\Documents\Code Proyects\NS_OrdersSystem\NS_OrdersSystem\obj\Release\NS_OrdersSystem.pdb
-C:\Users\Henry\Documents\Code Proyects\NS_OrdersSystem\NS_OrdersSystem\obj\Release\NS_OrdersSystem.csprojResolveAssemblyReference.cache
