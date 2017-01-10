@@ -48,7 +48,7 @@ namespace NS_OrdersSystem.Views
         private void ShowAllOrders()
         {
             DataGridOrders.ItemsSource = OrdersServices.GetAllOrders().DefaultView;
-    
+            
         }
 
         private void TextBoxPrecio_TextChanged(object sender, TextChangedEventArgs e)
