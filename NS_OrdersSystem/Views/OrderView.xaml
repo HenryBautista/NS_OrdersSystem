@@ -111,8 +111,19 @@
                     </Controls:Tile>
                     
                 </StackPanel>
-                <DataGrid Name="DataGridOrders" Height="380" AutoGenerateColumns="True" SelectionChanged="DataGridOrders_SelectionChanged">
-                    
+                <DataGrid Name="DataGridOrders" Height="380" SelectionChanged="DataGridOrders_SelectionChanged" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="CODIGO" Binding="{Binding or_order}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="CLIENTE" Binding="{Binding or_client_name}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="FECHA" Binding="{Binding or_date}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="TELEFONO" Binding="{Binding or_phone}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="PRODUCTO" Binding="{Binding or_product_description}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="PRECIO" Binding="{Binding or_price}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="ANTICIPO" Binding="{Binding or_anticipe}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="OBSERVACION" Binding="{Binding or_observation}"></DataGridTextColumn>
+                        <DataGridCheckBoxColumn Header="ESTADO" Binding="{Binding or_state}"></DataGridCheckBoxColumn>
+                        <DataGridTextColumn Header="USUARIO" Binding="{Binding name}"></DataGridTextColumn>
+                    </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
         </Grid>
