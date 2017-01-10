@@ -48,8 +48,7 @@ Temporary Items
 NS_OrdersSystem/bin/Release/NS_OrdersSystem.vshost.application
 NS_OrdersSystem/bin/Release/NS_OrdersSystem.vshost.application
 NS_OrdersSystem/bin/Release/NS_OrdersSystem.vshost.exe.manifest
-NS_OrdersSystem/bin/Release/app.publish/Application Files/NS_OrdersSystem_1_0_0_5/NS_OrdersSystem.exe.deploy
-*.application
+
 NS_OrdersSystem/bin/Release/app.publish/NS_OrdersSystem.exe
 NS_OrdersSystem/bin/Release/NS_OrdersSystem.exe
 NS_OrdersSystem/bin/Release/NS_OrdersSystem.pdb
@@ -62,3 +61,8 @@ NS_OrdersSystem/obj/Release/NS_OrdersSystem.pdb
 NS_OrdersSystem/obj/Release/NS_OrdersSystem.application
 NS_OrdersSystem/bin/Release/NS_OrdersSystem.vshost.application
 NS_OrdersSystem/bin/Release/NS_OrdersSystem.exe
+NS_OrdersSystem/bin/Release/app.publish/Application Files/NS_OrdersSystem_1_0_0_6/MahApps.Metro.dll.deploy
+NS_OrdersSystem/bin/Release/app.publish/Application Files/NS_OrdersSystem_1_0_0_6/NS_OrdersSystem.exe.config.deploy
+NS_OrdersSystem/bin/Release/app.publish/Application Files/NS_OrdersSystem_1_0_0_6/NS_OrdersSystem.exe.deploy
+NS_OrdersSystem/bin/Release/app.publish/Application Files/NS_OrdersSystem_1_0_0_6/NS_OrdersSystem.exe.manifest
+NS_OrdersSystem/bin/Release/app.publish/Application Files/NS_OrdersSystem_1_0_0_6/System.Windows.Interactivity.dll.deploy
