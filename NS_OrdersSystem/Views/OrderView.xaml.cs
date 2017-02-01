@@ -24,12 +24,21 @@ namespace NS_OrdersSystem.Views
     public partial class OrderView : MetroWindow
     {
         private int currentItemSelected = new int();
+        private int currentItemSelectedCoti = new int();
         private bool isMaster = false;
         public OrderView()
         {
             InitializeComponent();
             ShowAllOrders();
+            ShowAllQuotes();
             ShowCurrentUser();
+            DatePickerDate.SelectedDate = DateTime.Now;
+            DatePickerDateCoti.SelectedDate = DateTime.Now;
+        }
+
+        private void ShowAllQuotes()
+        {
+            DataGridQuotes.ItemsSource = QuotesServices.GetAllQuotes().DefaultView;
         }
 
         private void ShowCurrentUser()
@@ -41,6 +50,8 @@ namespace NS_OrdersSystem.Views
             {
                 ButtonDelete.IsEnabled = false;
                 ButtonUsuarios.Visibility = Visibility.Collapsed;
+                ButtonDeleteCoti.IsEnabled = false;
+
             }
             TextBoxCurrentUser.Text = name.ToUpper();
         }
@@ -212,6 +223,7 @@ namespace NS_OrdersSystem.Views
             DataRowView r = (DataRowView)DataGridOrders.SelectedItem;
             currentItemSelected =int.Parse(r["or_order"].ToString());
             fillSpacesOrder();
+            calcMoney();
             if (!isMaster)
             {
                if (r["or_user_owner"].ToString()==SessionData.CurrentUser.ToString())
@@ -338,6 +350,142 @@ namespace NS_OrdersSystem.Views
                     TextBoxAlert.Text = "Saldo superior al precio";
                 }
             }
+        }
+
+        private void ButtonAddCoti_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DateTime? date = new DateTime?();
+                date = DatePickerDateCoti.SelectedDate;
+                QuotesServices.InsertQuote(date, TextBoxNameCoti.Text, TextBoxPhoneCoti.Text, TextBoxDetalle.Text, TextBoxPrecioCoti.Text, TextBoxProveedor.Text);
+                TextBlockMessage.Text = "Guardado con exito...";
+                cleanSpacesCoti();
+                ShowAllQuotes();
+            }
+            catch (Exception)
+            {
+
+
+            }
+        }
+
+        private void cleanSpacesCoti()
+        {
+            DatePickerDateCoti.SelectedDate = DateTime.Now;
+            TextBoxNameCoti.Text = "";
+            TextBoxPhoneCoti.Text = "";
+            TextBoxDetalle.Text = "";
+            TextBoxPrecioCoti.Text = "0.00";
+            TextBoxNumeroCoti.Text = "";
+            ButtonUpdateCoti.IsEnabled = false;
+            TextBoxUsuarioCoti.Text = "";
+            currentItemSelectedCoti = -1;
+        }
+
+        private void DataGridQuotes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                DataRowView r = (DataRowView)DataGridQuotes.SelectedItem;
+                currentItemSelectedCoti = int.Parse(r["qu_quote"].ToString());
+                fillSpacesQuote();
+                if (!isMaster)
+                {
+                    if (r["qu_user_owner"].ToString() == SessionData.CurrentUser.ToString())
+                    {
+                        ButtonUpdateCoti.IsEnabled = true;
+                    }
+                    else
+                    {
+                        ButtonUpdateCoti.IsEnabled = false;
+                    }
+                }
+                else
+                {
+                    ButtonUpdateCoti.IsEnabled = true;
+                }
+
+
+            }
+            catch (Exception)
+            {
+
+
+            }
+        }
+
+        private void fillSpacesQuote()
+        {
+            DataTable table = QuotesServices.GetThisQuote(currentItemSelectedCoti);
+            DatePickerDateCoti.SelectedDate = table.Rows[0]["qu_date"] as DateTime?;
+            TextBoxNameCoti.Text = table.Rows[0]["qu_client_name"].ToString();
+            TextBoxPhoneCoti.Text = table.Rows[0]["qu_phone"].ToString();
+            TextBoxDetalle.Text = table.Rows[0]["qu_detail"].ToString();
+            TextBoxPrecioCoti.Text = table.Rows[0]["qu_price"].ToString();
+            TextBoxProveedor.Text = table.Rows[0]["qu_supplier"].ToString();
+            TextBoxNumeroCoti.Text = table.Rows[0]["qu_quote"].ToString();
+            DataTable userData = UsersServices.GetThisUser(table.Rows[0]["qu_user_owner"].ToString());
+            TextBoxUsuarioCoti.Text = userData.Rows[0]["us_name"].ToString() + " " + userData.Rows[0]["us_paterno"].ToString() + " " + userData.Rows[0]["us_materno"].ToString();
+
+        }
+
+        private void ButtonDeleteCoti_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                QuotesServices.DeleteThisQuote(currentItemSelectedCoti);
+                cleanSpacesCoti();
+                ShowAllQuotes();
+                TextBlockMessage.Text = "Eliminado con exito...";
+            }
+            catch (Exception)
+            {
+                TextBlockMessage.Text = "No se pudo Elminar...";
+
+            }
+        }
+
+        private void TextBoxPrecioCoti_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !isTextAllowed(e.Text);
+        }
+
+        private void ButtonUpdateCoti_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DateTime? date = new DateTime?();
+                date = DatePickerDateCoti.SelectedDate;
+                
+
+                QuotesServices.UpdateThisQuote(date, TextBoxNameCoti.Text, TextBoxPhoneCoti.Text, TextBoxDetalle.Text, TextBoxPrecioCoti.Text, TextBoxProveedor.Text, currentItemSelectedCoti);
+                TextBlockMessage.Text = "Actualizado con exito...";
+                cleanSpacesCoti();
+                ShowAllQuotes();
+
+            }
+            catch (Exception)
+            {
+                TextBlockMessage.Text = "Ha Ocurrido un error...";
+
+            }
+        }
+
+        private void ButtonCleanCoti_Click(object sender, RoutedEventArgs e)
+        {
+            cleanSpacesCoti();
+        }
+
+        private void ButtonBuscarCoti_Click(object sender, RoutedEventArgs e)
+        {
+            DataTable table = QuotesServices.FindThisQuote(TBSClientNameCoti.Text, DPSDateCoti.Text);
+            DataGridQuotes.ItemsSource = table.DefaultView;
+        }
+
+        private void ButtonShowAllCoti_Click(object sender, RoutedEventArgs e)
+        {
+            ShowAllQuotes();
         }
 
     }

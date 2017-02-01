@@ -1,21 +1,18 @@
-﻿using System;
+﻿using NS_OrdersSystem.Data;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NS_OrdersSystem.Data;
+
 namespace NS_OrdersSystem.Services
 {
-    public static class OrdersServices
+    public class QuotesServices
     {
-        public static void InsertOrder() 
-        {
-            
-        }
 
-        internal static void InsertOrder(DateTime? date, string p1, string p2, string p3, string p4, string p5, string p6, bool state)
+        internal static DataTable GetAllQuotes()
         {
             DataTable table = new DataTable();
             try
@@ -25,22 +22,59 @@ namespace NS_OrdersSystem.Services
                 SqlCommand comando = new SqlCommand
                 {
                     Connection = conexion,
-                    CommandText = "ns_orders..sp_orders",
+                    CommandText = "ns_orders..sp_quotes",
+                    CommandType = CommandType.StoredProcedure,
+                    CommandTimeout = 0,
+                };
+
+                comando.Parameters.AddWithValue("i_accion", "S1");
+
+                 
+                comando.ExecuteNonQuery();
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = comando;
+                adapter.Fill(table);
+                adapter.Dispose();
+
+
+
+                conexion.Close();
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return table;
+        }
+
+        internal static void InsertQuote(DateTime? date, string p1, string p2, string p3, string p4, string p5)
+        {
+            DataTable table = new DataTable();
+            try
+            {
+                SqlConnection conexion = new SqlConnection(DBManager.sqlConnectionString);
+                conexion.Open();
+                SqlCommand comando = new SqlCommand
+                {
+                    Connection = conexion,
+                    CommandText = "ns_orders..sp_quotes",
                     CommandType = CommandType.StoredProcedure,
                     CommandTimeout = 0,
                 };
 
                 comando.Parameters.AddWithValue("i_accion", "I1");
                 comando.Parameters.AddWithValue("i_date", date);
-                comando.Parameters.AddWithValue("i_client_name",p1.ToUpper() );
-                comando.Parameters.AddWithValue("i_phone",p2);
-                comando.Parameters.AddWithValue("i_product_description",p3.ToUpper() );
-                comando.Parameters.AddWithValue("i_price",p4 );
-                comando.Parameters.AddWithValue("i_anticipe",p5 );
-                comando.Parameters.AddWithValue("i_observation",p6 );
-                comando.Parameters.AddWithValue("i_state",state);
+                comando.Parameters.AddWithValue("i_client_name", p1.ToUpper());
+                comando.Parameters.AddWithValue("i_phone", p2);
+                comando.Parameters.AddWithValue("i_detail", p3.ToUpper());
+                comando.Parameters.AddWithValue("i_price", p4);
+                comando.Parameters.AddWithValue("i_supplier", p5);
                 comando.Parameters.AddWithValue("i_user_owner", SessionData.CurrentUser);
-                
+
 
                 comando.ExecuteNonQuery();
 
@@ -51,11 +85,11 @@ namespace NS_OrdersSystem.Services
             catch (Exception)
             {
 
-              
+
             }
         }
 
-        internal static DataTable GetAllOrders()
+        internal static DataTable GetThisQuote(int currentItemSelectedCoti)
         {
             DataTable table = new DataTable();
             try
@@ -65,50 +99,13 @@ namespace NS_OrdersSystem.Services
                 SqlCommand comando = new SqlCommand
                 {
                     Connection = conexion,
-                    CommandText = "ns_orders..sp_orders",
-                    CommandType = CommandType.StoredProcedure,
-                    CommandTimeout = 0,
-                };
-
-                comando.Parameters.AddWithValue("i_accion", "S1");
-              
-                comando.ExecuteNonQuery();
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                adapter.SelectCommand = comando;
-                adapter.Fill(table);
-                adapter.Dispose();
-               
-
-
-                conexion.Close();
-
-
-            }
-            catch (Exception)
-            {
-
-            }
-
-            return table;
-        }
-
-        internal static DataTable GetThisOrder(int currentItemSelected)
-        {
-            DataTable table = new DataTable();
-            try
-            {
-                SqlConnection conexion = new SqlConnection(DBManager.sqlConnectionString);
-                conexion.Open();
-                SqlCommand comando = new SqlCommand
-                {
-                    Connection = conexion,
-                    CommandText = "ns_orders..sp_orders",
+                    CommandText = "ns_orders..sp_quotes",
                     CommandType = CommandType.StoredProcedure,
                     CommandTimeout = 0,
                 };
 
                 comando.Parameters.AddWithValue("i_accion", "S2");
-                comando.Parameters.AddWithValue("i_order",currentItemSelected);
+                comando.Parameters.AddWithValue("i_quote", currentItemSelectedCoti);
 
                 comando.ExecuteNonQuery();
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -125,13 +122,13 @@ namespace NS_OrdersSystem.Services
             catch (Exception)
             {
 
-               
+
             }
 
             return table;
         }
 
-        internal static void UpdateThisOrder(DateTime? date, string p1, string p2, string p3, string p4, string p5, string p6, bool state, int currentItemSelected)
+        internal static void DeleteThisQuote(int currentItemSelectedCoti)
         {
             DataTable table = new DataTable();
             try
@@ -141,7 +138,38 @@ namespace NS_OrdersSystem.Services
                 SqlCommand comando = new SqlCommand
                 {
                     Connection = conexion,
-                    CommandText = "ns_orders..sp_orders",
+                    CommandText = "ns_orders..sp_quotes",
+                    CommandType = CommandType.StoredProcedure,
+                    CommandTimeout = 0,
+                };
+
+                comando.Parameters.AddWithValue("i_accion", "D1");
+                comando.Parameters.AddWithValue("i_quote", currentItemSelectedCoti);
+
+                comando.ExecuteNonQuery();
+
+                conexion.Close();
+
+
+            }
+            catch (Exception)
+            {
+
+
+            }
+        }
+
+        internal static void UpdateThisQuote(DateTime? date, string p1, string p2, string p3, string p4, string p5, int currentItemSelected)
+        {
+            DataTable table = new DataTable();
+            try
+            {
+                SqlConnection conexion = new SqlConnection(DBManager.sqlConnectionString);
+                conexion.Open();
+                SqlCommand comando = new SqlCommand
+                {
+                    Connection = conexion,
+                    CommandText = "ns_orders..sp_quotes",
                     CommandType = CommandType.StoredProcedure,
                     CommandTimeout = 0,
                 };
@@ -150,13 +178,11 @@ namespace NS_OrdersSystem.Services
                 comando.Parameters.AddWithValue("i_date", date);
                 comando.Parameters.AddWithValue("i_client_name", p1.ToUpper());
                 comando.Parameters.AddWithValue("i_phone", p2);
-                comando.Parameters.AddWithValue("i_product_description", p3.ToUpper());
+                comando.Parameters.AddWithValue("i_detail", p3.ToUpper());
                 comando.Parameters.AddWithValue("i_price", p4);
-                comando.Parameters.AddWithValue("i_anticipe", p5);
-                comando.Parameters.AddWithValue("i_observation", p6);
-                comando.Parameters.AddWithValue("i_state", state);
+                comando.Parameters.AddWithValue("i_supplier", p5);
                 //comando.Parameters.AddWithValue("i_user_owner", SessionData.CurrentUser);
-                comando.Parameters.AddWithValue("i_order", currentItemSelected);
+                comando.Parameters.AddWithValue("i_quote", currentItemSelected);
 
                 comando.ExecuteNonQuery();
 
@@ -167,11 +193,11 @@ namespace NS_OrdersSystem.Services
             catch (Exception)
             {
 
-                
+
             }
         }
 
-        internal static void DeleteThisOrder(int currentItemSelected)
+        internal static DataTable FindThisQuote(string name, string date)
         {
             DataTable table = new DataTable();
             try
@@ -181,49 +207,14 @@ namespace NS_OrdersSystem.Services
                 SqlCommand comando = new SqlCommand
                 {
                     Connection = conexion,
-                    CommandText = "ns_orders..sp_orders",
-                    CommandType = CommandType.StoredProcedure,
-                    CommandTimeout = 0,
-                };
-
-                comando.Parameters.AddWithValue("i_accion", "D1");
-                comando.Parameters.AddWithValue("i_order", currentItemSelected);
-
-                comando.ExecuteNonQuery();
-
-                conexion.Close();
-
-
-            }
-            catch (Exception)
-            {
-
-               
-            }
-        }
-
-        internal static DataTable FindThisOrder(string name, string product, string date)
-        {
-
-            DataTable table = new DataTable();
-            try
-            {
-                SqlConnection conexion = new SqlConnection(DBManager.sqlConnectionString);
-                conexion.Open();
-                SqlCommand comando = new SqlCommand
-                {
-                    Connection = conexion,
-                    CommandText = "ns_orders..sp_orders",
+                    CommandText = "ns_orders..sp_quotes",
                     CommandType = CommandType.StoredProcedure,
                     CommandTimeout = 0,
                 };
 
                 comando.Parameters.AddWithValue("i_accion", "F1");
-                if (name!="")
+                if (name != "")
                     comando.Parameters.AddWithValue("i_client_name", name.ToUpper());
-                
-                if(product!="")
-                    comando.Parameters.AddWithValue("i_product_description", product.ToUpper());
 
                 if (date != "")
                     comando.Parameters.AddWithValue("i_date", date);
@@ -247,11 +238,6 @@ namespace NS_OrdersSystem.Services
             }
 
             return table;
-        }
-
-        internal static void InsertQuote(DateTime? date, string p1, string p2, string p3, string p4, string p5)
-        {
-            throw new NotImplementedException();
         }
     }
 }

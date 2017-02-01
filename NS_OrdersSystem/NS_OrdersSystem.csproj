@@ -15,7 +15,7 @@
     <WarningLevel>4</WarningLevel>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
-    <PublishUrl>C:\Users\Henry\Documents\Code Proyects\NS_OrdersSystem\NS_Realese\</PublishUrl>
+    <PublishUrl>C:\Users\Henry\Desktop\NSRealese\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -94,6 +94,7 @@
     <Compile Include="Data\SessionData.cs" />
     <Compile Include="Services\DBManager.cs" />
     <Compile Include="Services\OrdersServices.cs" />
+    <Compile Include="Services\QuotesServices.cs" />
     <Compile Include="Services\UsersServices.cs" />
     <Compile Include="Views\OrderView.xaml.cs">
       <DependentUpon>OrderView.xaml</DependentUpon>

@@ -36,11 +36,7 @@
     </Window.Resources>
     <Grid Name="GridMain">
         
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="5*"/>
-            <RowDefinition/>            
-        </Grid.RowDefinitions>
+        
         <TextBlock Name="TextBlockMessage" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" Style="{StaticResource TextSubTitulo}" />
 
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Height="25" VerticalAlignment="Top" Margin="100,5">
@@ -49,130 +45,266 @@
             <Controls:Tile Height="20" Background="WhiteSmoke" Content="TERMINAR SESION" Foreground="Black" Click="Tile_Click"></Controls:Tile>
             <Controls:Tile Name="ButtonUsuarios" Height="20" Background="WhiteSmoke" Content="USUARIOS" Foreground="Black" Click="ButtonUsuarios_Click"></Controls:Tile>
         </StackPanel>
-        <TextBlock Text="Recibos" Style="{StaticResource TextTitulo}" HorizontalAlignment="Left" Margin="50,0" VerticalAlignment="Center"/>
-        <Grid Grid.Row="1" Margin="50,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="1.5*"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel HorizontalAlignment="Left">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Usuario" VerticalAlignment="Bottom" Margin="0,0,5,0"/>
-                    <TextBox Name="TextBoxUsuario" IsEnabled="False" Width="100"/>
-                    <TextBlock Text="N# Recibo" VerticalAlignment="Bottom" Margin="5,0,5,0"/>
-                    <TextBox Name="TextBoxNumeroRecibo" IsEnabled="False" Width="100" />
+        
+        <Controls:MetroAnimatedTabControl Grid.Row="1" Margin="0,30,0,0" TabStripPlacement="top">
+            <!--<Controls:Pivot.Header>
+                NooteBooksStore
+            </Controls:Pivot.Header>-->
+            
+            
+            <TabItem  Header="recibos">
+                
+                    <Grid Grid.Row="1" Margin="0,20,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10*"/>
+                            <RowDefinition Height="90"/>
+                        </Grid.RowDefinitions>
 
-                </StackPanel>
-                <TextBlock Text="Fecha"/>
-                <DatePicker Name="DatePickerDate" Grid.Row="1" ></DatePicker>
-                <TextBlock Text="Nombre Cliente"/>
-                <TextBox Name="TextBoxName"/>
-                    <TextBlock Text="Telefono"/>
-                <TextBox Name="TextBoxPhone"/>
-                <TextBlock Text="Producto"/>
-                <TextBox Name="TextBoxProduct"/>
-                <TextBlock Text="Precio"/>
-                <StackPanel Orientation="Horizontal">
-                    <TextBox Name="TextBoxPrecio" SelectedText="0.00" Width="100" HorizontalAlignment="Left" TextChanged="TextBoxPrecio_TextChanged" LostFocus="TextBoxPrecio_LostFocus" PreviewTextInput="TextBoxPrecio_PreviewTextInput" />
-                    <TextBlock Text="  BS. " VerticalAlignment="Center"/>
-                    <TextBlock Name="TextBoxAlert" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                </StackPanel>
-                <TextBlock Text="Anticipo"/>
-                <TextBox Name="TextBoxAnticipe" SelectedText="0.00" Width="100" HorizontalAlignment="Left" TextChanged="Anticipe_TextChanged" LostFocus="TextBoxAnticipe_LostFocus"/>
-                <TextBlock Text="Saldo"/>
-                <TextBox Name="TextBoxSaldo" Width="100" HorizontalAlignment="Left" IsEnabled="False"/>
-                <TextBlock Text="Observaciones"/>
-                <TextBox Height="60" TextWrapping="Wrap" Name="TextBoxObservation" MaxWidth="300" Width="300"/>
-                <TextBlock Text="Estado"/>
-                <ComboBox Name="ComboBoxState" Width="100" HorizontalAlignment="Left" SelectedIndex="0">
-                    <ComboBoxItem>ABIERTO</ComboBoxItem>
-                    <ComboBoxItem>CANCELADO</ComboBoxItem>
-                </ComboBox>
-                
-                
-            </StackPanel>            
-            <StackPanel Grid.Column="1">
-                <TextBlock Text="Historial de Recibos" Style="{StaticResource TextSubTitulo}"/>
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
-                    <StackPanel Margin="10,0">
-                        <TextBlock Text="Nombre Cliente"/>
-                        <TextBox Width="100" Name="TBSClientName"/>
-                    </StackPanel>
-                    <StackPanel Margin="10,0">
-                        <TextBlock Text="Producto"/>
-                        <TextBox Width="100" Name="TBSProduct"/>
-                    </StackPanel>
-                    <StackPanel Margin="10,0">
-                        <TextBlock Text="Fecha"/>
-                        <DatePicker Width="100" Name="DPSDate"/>
-                    </StackPanel>
-                    <Controls:Tile Name="ButtonBuscar" Width="100" Height="30" Background="#FF0A3F63" VerticalAlignment="Bottom" Margin="10,0" Click="ButtonBuscar_Click">
-                        <TextBlock VerticalAlignment="Center">Buscar</TextBlock>
-                    </Controls:Tile>
-                    
-                </StackPanel>
-                <DataGrid Name="DataGridOrders" Height="380" SelectionChanged="DataGridOrders_SelectionChanged" AutoGenerateColumns="False">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="CODIGO" Binding="{Binding or_order}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="CLIENTE" Binding="{Binding or_client_name}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="FECHA" Binding="{Binding or_date}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="TELEFONO" Binding="{Binding or_phone}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="PRODUCTO" Binding="{Binding or_product_description}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="PRECIO" Binding="{Binding or_price}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="ANTICIPO" Binding="{Binding or_anticipe}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="OBSERVACION" Binding="{Binding or_observation}"></DataGridTextColumn>
-                        <DataGridCheckBoxColumn Header="ESTADO" Binding="{Binding or_state}"></DataGridCheckBoxColumn>
-                        <DataGridTextColumn Header="USUARIO" Binding="{Binding name}"></DataGridTextColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </StackPanel>
-        </Grid>
-        <Grid Grid.Row="2" Background="#FF0A3F63">
-            <StackPanel Orientation="Horizontal" Margin="50,0">
-                <StackPanel VerticalAlignment="Center" Margin="0,0,10,0" >
-                    <Button Name="ButtonAdd" Background="Transparent" BorderThickness="0" Foreground="Black" Focusable="False"
+                        <Grid Grid.Row="0" Margin="20,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="1.5*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel HorizontalAlignment="Left">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Usuario" VerticalAlignment="Bottom" Margin="0,0,5,0"/>
+                                    <TextBox Name="TextBoxUsuario" IsEnabled="False" Width="100"/>
+                                    <TextBlock Text="N# Recibo" VerticalAlignment="Bottom" Margin="5,0,5,0"/>
+                                    <TextBox Name="TextBoxNumeroRecibo" IsEnabled="False" Width="100" />
+
+                                </StackPanel>
+                                <TextBlock Text="Fecha"/>
+                                <DatePicker Name="DatePickerDate" Grid.Row="1" ></DatePicker>
+                                <TextBlock Text="Nombre Cliente"/>
+                                <TextBox Name="TextBoxName"/>
+                                <TextBlock Text="Telefono"/>
+                                <TextBox Name="TextBoxPhone"/>
+                                <TextBlock Text="Producto"/>
+                                <TextBox Name="TextBoxProduct"/>
+                                <TextBlock Text="Precio"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Name="TextBoxPrecio" SelectedText="0.00" Width="100" HorizontalAlignment="Left" TextChanged="TextBoxPrecio_TextChanged" LostFocus="TextBoxPrecio_LostFocus" PreviewTextInput="TextBoxPrecio_PreviewTextInput" />
+                                    <TextBlock Text="  BS. " VerticalAlignment="Center"/>
+                                    <TextBlock Name="TextBoxAlert" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <TextBlock Text="Anticipo"/>
+                                <TextBox Name="TextBoxAnticipe" SelectedText="0.00" Width="100" HorizontalAlignment="Left" TextChanged="Anticipe_TextChanged" LostFocus="TextBoxAnticipe_LostFocus"/>
+                                <TextBlock Text="Saldo"/>
+                                <TextBox Name="TextBoxSaldo" Width="100" HorizontalAlignment="Left" IsEnabled="False"/>
+                                <TextBlock Text="Observaciones"/>
+                                <TextBox Height="60" TextWrapping="Wrap" Name="TextBoxObservation" MaxWidth="300" Width="300"/>
+                                <TextBlock Text="Estado"/>
+                                <ComboBox Name="ComboBoxState" Width="100" HorizontalAlignment="Left" SelectedIndex="0">
+                                    <ComboBoxItem>ABIERTO</ComboBoxItem>
+                                    <ComboBoxItem>CANCELADO</ComboBoxItem>
+                                </ComboBox>
+
+
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="Historial de Recibos" Style="{StaticResource TextSubTitulo}"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
+                                    <StackPanel Margin="10,0">
+                                        <TextBlock Text="Nombre Cliente"/>
+                                        <TextBox Width="100" Name="TBSClientName"/>
+                                    </StackPanel>
+                                    <StackPanel Margin="10,0">
+                                        <TextBlock Text="Producto"/>
+                                        <TextBox Width="100" Name="TBSProduct"/>
+                                    </StackPanel>
+                                    <StackPanel Margin="10,0">
+                                        <TextBlock Text="Fecha"/>
+                                        <DatePicker Width="100" Name="DPSDate"/>
+                                    </StackPanel>
+                                    <Controls:Tile Name="ButtonBuscar" Width="100" Height="30" Background="#FF0A3F63" VerticalAlignment="Bottom" Margin="10,0" Click="ButtonBuscar_Click">
+                                        <TextBlock VerticalAlignment="Center">Buscar</TextBlock>
+                                    </Controls:Tile>
+
+                                </StackPanel>
+                                <DataGrid Name="DataGridOrders" Height="380" SelectionChanged="DataGridOrders_SelectionChanged" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="CODIGO" Binding="{Binding or_order}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="CLIENTE" Binding="{Binding or_client_name}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="FECHA" Binding="{Binding or_date}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="TELEFONO" Binding="{Binding or_phone}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="PRODUCTO" Binding="{Binding or_product_description}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="PRECIO" Binding="{Binding or_price}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="ANTICIPO" Binding="{Binding or_anticipe}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="OBSERVACION" Binding="{Binding or_observation}"></DataGridTextColumn>
+                                        <DataGridCheckBoxColumn Header="ESTADO" Binding="{Binding or_state}"></DataGridCheckBoxColumn>
+                                        <DataGridTextColumn Header="USUARIO" Binding="{Binding name}"></DataGridTextColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Row="2" Background="#FF0A3F63">
+                            <StackPanel Orientation="Horizontal" Margin="50,0,0,0">
+                                <StackPanel VerticalAlignment="Center" Margin="0,0,10,0" >
+                                    <Button Name="ButtonAdd" Background="Transparent" BorderThickness="0" Foreground="Black" Focusable="False"
                     Height="50" Width="50" Click="ButtonAdd_Click">
-                        <Image Source="/NS_OrdersSystem;component/Images/Add-New.png"/>
-                    </Button>
-                    <TextBlock Text="Guardar Nuevo" TextWrapping="Wrap" TextAlignment="Center" Foreground="White" FontWeight="Light"
+                                        <Image Source="/NS_OrdersSystem;component/Images/Add-New.png"/>
+                                    </Button>
+                                    <TextBlock Text="Guardar Nuevo" TextWrapping="Wrap" TextAlignment="Center" Foreground="White" FontWeight="Light"
                                Width="50"
                                HorizontalAlignment="Center">
-                    </TextBlock>
-                </StackPanel>
-                <StackPanel VerticalAlignment="Center" Margin="0,0,10,0" >
-                    <Button Name="ButtonClean" Background="Transparent" BorderThickness="0" Foreground="Black" Focusable="False"
+                                    </TextBlock>
+                                </StackPanel>
+                                <StackPanel VerticalAlignment="Center" Margin="0,0,10,0" >
+                                    <Button Name="ButtonClean" Background="Transparent" BorderThickness="0" Foreground="Black" Focusable="False"
                     Height="50" Width="50" Click="ButtonClean_Click">
-                        <Image Source="/NS_OrdersSystem;component/Images/clean.png"/>
-                    </Button>
-                    <TextBlock Text="Limpiar Forma" TextWrapping="Wrap" TextAlignment="Center" Width="50" Foreground="White" FontWeight="Light" HorizontalAlignment="Center"/>
-                </StackPanel>
-                <StackPanel VerticalAlignment="Center" Margin="0,0,10,0" >
-                    <Button Name="ButtonUpdate" Background="Transparent" IsEnabled="False" BorderThickness="0" Foreground="Black" Focusable="False"
+                                        <Image Source="/NS_OrdersSystem;component/Images/clean.png"/>
+                                    </Button>
+                                    <TextBlock Text="Limpiar Forma" TextWrapping="Wrap" TextAlignment="Center" Width="50" Foreground="White" FontWeight="Light" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                                <StackPanel VerticalAlignment="Center" Margin="0,0,10,0" >
+                                    <Button Name="ButtonUpdate" Background="Transparent" IsEnabled="False" BorderThickness="0" Foreground="Black" Focusable="False"
                     Height="50" Width="50" Click="ButtonUpdate_Click">
-                        <Image Source="/NS_OrdersSystem;component/Images/Refresh.png"/>
-                    </Button>
-                    <TextBlock Text="Actualizar Recibo" TextWrapping="Wrap" TextAlignment="Center" Width="50" Foreground="White" FontWeight="Light" HorizontalAlignment="Center"/>
-                </StackPanel>
-                <StackPanel VerticalAlignment="Center" Margin="0,0,10,0" >
-                    <Button Name="ButtonDelete" Background="Transparent" BorderThickness="0" Foreground="Black" Focusable="False"
+                                        <Image Source="/NS_OrdersSystem;component/Images/Refresh.png"/>
+                                    </Button>
+                                    <TextBlock Text="Actualizar Recibo" TextWrapping="Wrap" TextAlignment="Center" Width="50" Foreground="White" FontWeight="Light" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                                <StackPanel VerticalAlignment="Center" Margin="0,0,10,0" >
+                                    <Button Name="ButtonDelete" Background="Transparent" BorderThickness="0" Foreground="Black" Focusable="False"
                     Height="50" Width="50" Click="ButtonDelete_Click">
-                        <Image Source="/NS_OrdersSystem;component/Images/Trash.png"/>
-                    </Button>
-                    <TextBlock Text="Eliminar Recibo" TextWrapping="Wrap" Width="50" TextAlignment="Center" Foreground="White" FontWeight="Light" HorizontalAlignment="Center"/>
-                </StackPanel>
-                
-            </StackPanel>
-            <StackPanel VerticalAlignment="Center" Margin="0,0,50,0" HorizontalAlignment="Right">
-                <Button Name="ButtonShowAll" Background="Transparent" BorderThickness="0" Foreground="Black" Focusable="False"
+                                        <Image Source="/NS_OrdersSystem;component/Images/Trash.png"/>
+                                    </Button>
+                                    <TextBlock Text="Eliminar Recibo" TextWrapping="Wrap" Width="50" TextAlignment="Center" Foreground="White" FontWeight="Light" HorizontalAlignment="Center"/>
+                                </StackPanel>
+
+                            </StackPanel>
+                            <StackPanel VerticalAlignment="Center" Margin="0,0,50,0" HorizontalAlignment="Right">
+                                <Button Name="ButtonShowAll" Background="Transparent" BorderThickness="0" Foreground="Black" Focusable="False"
                     Height="50" Width="50" Click="ButtonShowAll_Click">
-                    <Image Source="/NS_OrdersSystem;component/Images/View-List.png"/>
-                </Button>
-                <TextBlock Text="Mostrar todo" TextWrapping="Wrap" TextAlignment="Center" Foreground="White" FontWeight="Light"
+                                    <Image Source="/NS_OrdersSystem;component/Images/View-List.png"/>
+                                </Button>
+                                <TextBlock Text="Mostrar todo" TextWrapping="Wrap" TextAlignment="Center" Foreground="White" FontWeight="Light"
                                Width="50"
                                HorizontalAlignment="Center">
-                </TextBlock>
-            </StackPanel>
-        </Grid>
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+         
+        
+        
+            </TabItem>
+            <TabItem Header="cotizaciones">
+                <Grid   Margin="0,20,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="90"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Margin="20,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="1.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel HorizontalAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Usuario" VerticalAlignment="Bottom" Margin="0,0,5,0"/>
+                                <TextBox Name="TextBoxUsuarioCoti" IsEnabled="False" Width="100"/>
+                                <TextBlock Text="N# Cotizacion" VerticalAlignment="Bottom" Margin="5,0,5,0"/>
+                                <TextBox Name="TextBoxNumeroCoti" IsEnabled="False" Width="100" />
+
+                            </StackPanel>
+                            <TextBlock Text="Fecha"/>
+                            <DatePicker Name="DatePickerDateCoti" Grid.Row="1" ></DatePicker>
+                            <TextBlock Text="Nombre Cliente"/>
+                            <TextBox Name="TextBoxNameCoti"/>
+                            <TextBlock Text="Telefono"/>
+                            <TextBox Name="TextBoxPhoneCoti"/>
+                            <TextBlock Text="Detalle"/>
+                            <TextBox Name="TextBoxDetalle" Height="60" TextWrapping="Wrap" MaxWidth="300" Width="300"/>
+                            <TextBlock Text="Precio"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Name="TextBoxPrecioCoti" PreviewTextInput="TextBoxPrecioCoti_PreviewTextInput" SelectedText="0.00" Width="100" HorizontalAlignment="Left"  />
+                            </StackPanel>
+                            <TextBlock Text="Proveedor"/>
+                            <TextBox Name="TextBoxProveedor"  Width="300" HorizontalAlignment="Left"/>
+
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="Historial de Recibos" Style="{StaticResource TextSubTitulo}"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
+                                <StackPanel Margin="10,0">
+                                    <TextBlock Text="Nombre Cliente"/>
+                                    <TextBox Width="100" Name="TBSClientNameCoti"/>
+                                </StackPanel>
+                                <StackPanel Margin="10,0">
+                                    <TextBlock Text="Fecha"/>
+                                    <DatePicker Width="100" Name="DPSDateCoti"/>
+                                </StackPanel>
+                                <Controls:Tile Name="ButtonBuscarCoti" Width="100" Height="30" Background="#FF0A3F63" VerticalAlignment="Bottom" Margin="10,0" Click="ButtonBuscarCoti_Click">
+                                    <TextBlock VerticalAlignment="Center">Buscar</TextBlock>
+                                </Controls:Tile>
+
+                            </StackPanel>
+                            <DataGrid Name="DataGridQuotes" Height="380" SelectionChanged="DataGridQuotes_SelectionChanged" AutoGenerateColumns="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="CODIGO" Binding="{Binding qu_quote}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="CLIENTE" Binding="{Binding qu_client_name}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="FECHA" Binding="{Binding qu_date}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="TELEFONO" Binding="{Binding qu_phone}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="DETALLE" Binding="{Binding qu_detail}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="PRECIO" Binding="{Binding qu_price}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="PROVEEDOR" Binding="{Binding qu_supplier}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="USUARIO" Binding="{Binding name}"></DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="2" Background="#FF0A3F63">
+                        <StackPanel Orientation="Horizontal" Margin="50,0,0,0">
+                            <StackPanel VerticalAlignment="Center" Margin="0,0,10,0" >
+                                <Button Name="ButtonAddCoti" Background="Transparent" BorderThickness="0" Foreground="Black" Focusable="False"
+                    Height="50" Width="50" Click="ButtonAddCoti_Click">
+                                    <Image Source="/NS_OrdersSystem;component/Images/Add-New.png"/>
+                                </Button>
+                                <TextBlock Text="Guardar Nuevo" TextWrapping="Wrap" TextAlignment="Center" Foreground="White" FontWeight="Light"
+                               Width="50"
+                               HorizontalAlignment="Center">
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel VerticalAlignment="Center" Margin="0,0,10,0" >
+                                <Button Name="ButtonCleanCoti" Background="Transparent" BorderThickness="0" Foreground="Black" Focusable="False"
+                    Height="50" Width="50" Click="ButtonCleanCoti_Click">
+                                    <Image Source="/NS_OrdersSystem;component/Images/clean.png"/>
+                                </Button>
+                                <TextBlock Text="Limpiar Forma" TextWrapping="Wrap" TextAlignment="Center" Width="50" Foreground="White" FontWeight="Light" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel VerticalAlignment="Center" Margin="0,0,10,0" >
+                                <Button Name="ButtonUpdateCoti" Background="Transparent" IsEnabled="False" BorderThickness="0" Foreground="Black" Focusable="False"
+                    Height="50" Width="50" Click="ButtonUpdateCoti_Click" >
+                                    <Image Source="/NS_OrdersSystem;component/Images/Refresh.png"/>
+                                </Button>
+                                <TextBlock Text="Actualizar Cotizado" TextWrapping="Wrap" TextAlignment="Center" Width="50" Foreground="White" FontWeight="Light" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel VerticalAlignment="Center" Margin="0,0,10,0" >
+                                <Button Name="ButtonDeleteCoti" Background="Transparent" BorderThickness="0" Foreground="Black" Focusable="False"
+                    Height="50" Width="50" Click="ButtonDeleteCoti_Click">
+                                    <Image Source="/NS_OrdersSystem;component/Images/Trash.png"/>
+                                </Button>
+                                <TextBlock Text="Eliminar Cotizado" TextWrapping="Wrap" Width="50" TextAlignment="Center" Foreground="White" FontWeight="Light" HorizontalAlignment="Center"/>
+                            </StackPanel>
+
+                        </StackPanel>
+                        <StackPanel VerticalAlignment="Center" Margin="0,0,50,0" HorizontalAlignment="Right">
+                            <Button Name="ButtonShowAllCoti" Background="Transparent" BorderThickness="0" Foreground="Black" Focusable="False"
+                    Height="50" Width="50" Click="ButtonShowAllCoti_Click">
+                                <Image Source="/NS_OrdersSystem;component/Images/View-List.png"/>
+                            </Button>
+                            <TextBlock Text="Mostrar todo" TextWrapping="Wrap" TextAlignment="Center" Foreground="White" FontWeight="Light"
+                               Width="50"
+                               HorizontalAlignment="Center">
+                            </TextBlock>
+                        </StackPanel>
+                    </Grid>
+                    
+                </Grid>
+            </TabItem>
+        </Controls:MetroAnimatedTabControl>
+
     </Grid>
     
     

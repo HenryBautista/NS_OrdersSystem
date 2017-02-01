@@ -13,7 +13,7 @@ us_enable bit
 
 create table orders
 (
-or_order int not null identity(1,1) primary key,
+or_order int not null identity(1165,1) primary key,
 or_date date,
 or_client_name varchar(200),
 or_phone varchar(20),
@@ -25,6 +25,17 @@ or_state bit,
 or_user_owner int foreign key references users(us_user)
 ); 
 
+create table quotes
+(
+qu_quote int not null identity(1,1) primary key,
+qu_date date,
+qu_client_name varchar(200),
+qu_phone varchar(20),
+qu_detail varchar(max),
+qu_price float,
+qu_supplier varchar(200),
+qu_user_owner int foreign key references users(us_user)
+)
 
 ----***---Procedures
 
@@ -205,3 +216,94 @@ begin
 	end
 
 end
+
+------********************************----------
+------********************************----------
+------**********QUOTES****************----------
+------********************************----------
+------********************************----------
+
+
+create procedure sp_quotes
+(
+@i_accion varchar(2),
+@i_quote int=null,
+@i_date date=null,
+@i_client_name varchar(200)=null,
+@i_phone varchar(20)=null,
+@i_detail varchar(max)=null,
+@i_price float=null,
+@i_supplier varchar(200)=null,
+@i_user_owner int=null
+)
+as
+begin
+
+	if(@i_accion='S1')
+	begin
+	select 
+		qu_quote,
+		qu_date ,
+		qu_client_name,
+		qu_phone ,
+		qu_detail,
+		qu_price ,
+		qu_supplier ,
+		qu_user_owner,
+		(select us_name+' '+us_paterno from users where us_user=qu_user_owner) as name 
+		
+	from quotes
+	end
+
+	if(@i_accion='S2')
+	begin
+	select * from quotes where qu_quote=@i_quote
+	end
+
+	if(@i_accion='I1')
+	begin
+	insert into quotes
+	(
+		qu_date ,
+		qu_client_name,
+		qu_phone ,
+		qu_detail,
+		qu_price ,
+		qu_supplier ,
+		qu_user_owner
+	)
+	values
+	(
+
+		@i_date,
+		@i_client_name,
+		@i_phone,
+		@i_detail,
+		@i_price,
+		@i_supplier,
+		@i_user_owner	
+	)
+
+	end
+
+	if(@i_accion='U1')
+	begin
+	update quotes
+	set
+		qu_date=@i_date,
+		qu_client_name=@i_client_name,
+		qu_phone=@i_phone,
+		qu_detail=@i_detail,
+		qu_price=@i_price,
+		qu_supplier=@i_supplier
+		--or_user_owner=@i_user_owner
+	where qu_quote=@i_quote
+	end
+
+	if(@i_accion='D1')
+	begin
+	delete quotes where qu_quote=@i_quote
+	end
+
+end
+
