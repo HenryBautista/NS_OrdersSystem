@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ns_ordersModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="orders">
+    <Key>
+      <PropertyRef Name="or_order" />
+    </Key>
+    <Property Name="or_order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="or_date" Type="date" />
+    <Property Name="or_client_name" Type="varchar" MaxLength="200" />
+    <Property Name="or_phone" Type="varchar" MaxLength="20" />
+    <Property Name="or_product_description" Type="varchar(max)" />
+    <Property Name="or_price" Type="float" />
+    <Property Name="or_anticipe" Type="float" />
+    <Property Name="or_observation" Type="varchar(max)" />
+    <Property Name="or_state" Type="bit" />
+    <Property Name="or_user_owner" Type="int" />
+  </EntityType>
+  <EntityType Name="quotes">
+    <Key>
+      <PropertyRef Name="qu_quote" />
+    </Key>
+    <Property Name="qu_quote" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="qu_date" Type="date" />
+    <Property Name="qu_client_name" Type="varchar" MaxLength="200" />
+    <Property Name="qu_phone" Type="varchar" MaxLength="20" />
+    <Property Name="qu_detail" Type="varchar(max)" />
+    <Property Name="qu_price" Type="float" />
+    <Property Name="qu_supplier" Type="varchar" MaxLength="200" />
+    <Property Name="qu_user_owner" Type="int" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="us_user" />
+    </Key>
+    <Property Name="us_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="us_login" Type="varchar" MaxLength="20" />
+    <Property Name="us_name" Type="varchar" MaxLength="50" />
+    <Property Name="us_paterno" Type="varchar" MaxLength="50" />
+    <Property Name="us_materno" Type="varchar" MaxLength="50" />
+    <Property Name="us_password" Type="varchar" MaxLength="20" />
+    <Property Name="us_master" Type="bit" />
+    <Property Name="us_enable" Type="bit" />
+  </EntityType>
+  <Association Name="FK__orders__or_user___38996AB5">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="orders" Type="Self.orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="us_user" />
+      </Principal>
+      <Dependent Role="orders">
+        <PropertyRef Name="or_user_owner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__quotes__qu_user___4CA06362">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="quotes" Type="Self.quotes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="us_user" />
+      </Principal>
+      <Dependent Role="quotes">
+        <PropertyRef Name="qu_user_owner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="sp_orders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="i_accion" Type="varchar" Mode="In" />
+    <Parameter Name="i_order" Type="int" Mode="In" />
+    <Parameter Name="i_date" Type="date" Mode="In" />
+    <Parameter Name="i_client_name" Type="varchar" Mode="In" />
+    <Parameter Name="i_phone" Type="varchar" Mode="In" />
+    <Parameter Name="i_product_description" Type="varchar(max)" Mode="In" />
+    <Parameter Name="i_price" Type="float" Mode="In" />
+    <Parameter Name="i_anticipe" Type="float" Mode="In" />
+    <Parameter Name="i_observation" Type="varchar(max)" Mode="In" />
+    <Parameter Name="i_state" Type="bit" Mode="In" />
+    <Parameter Name="i_user_owner" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_quotes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="i_accion" Type="varchar" Mode="In" />
+    <Parameter Name="i_quote" Type="int" Mode="In" />
+    <Parameter Name="i_date" Type="date" Mode="In" />
+    <Parameter Name="i_client_name" Type="varchar" Mode="In" />
+    <Parameter Name="i_phone" Type="varchar" Mode="In" />
+    <Parameter Name="i_detail" Type="varchar(max)" Mode="In" />
+    <Parameter Name="i_price" Type="float" Mode="In" />
+    <Parameter Name="i_supplier" Type="varchar" Mode="In" />
+    <Parameter Name="i_user_owner" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="i_accion" Type="varchar" Mode="In" />
+    <Parameter Name="i_user" Type="int" Mode="In" />
+    <Parameter Name="i_login" Type="varchar" Mode="In" />
+    <Parameter Name="i_name" Type="varchar" Mode="In" />
+    <Parameter Name="i_paterno" Type="varchar" Mode="In" />
+    <Parameter Name="i_materno" Type="varchar" Mode="In" />
+    <Parameter Name="i_password" Type="varchar" Mode="In" />
+    <Parameter Name="i_master" Type="bit" Mode="In" />
+    <Parameter Name="i_enable" Type="bit" Mode="In" />
+  </Function>
+  <EntityContainer Name="ns_ordersModelStoreContainer">
+    <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="quotes" EntityType="Self.quotes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__orders__or_user___38996AB5" Association="Self.FK__orders__or_user___38996AB5">
+      <End Role="users" EntitySet="users" />
+      <End Role="orders" EntitySet="orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__quotes__qu_user___4CA06362" Association="Self.FK__quotes__qu_user___4CA06362">
+      <End Role="users" EntitySet="users" />
+      <End Role="quotes" EntitySet="quotes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -239,5 +239,47 @@ namespace NS_OrdersSystem.Services
 
             return table;
         }
+
+        internal static DataSet1 FindThisQuoteToReport(string quote)
+        {
+
+            DataSet1 ds = new DataSet1();
+            try
+            {
+                SqlConnection conexion = new SqlConnection(DBManager.sqlConnectionString);
+                conexion.Open();
+                SqlCommand comando = new SqlCommand
+                {
+                    Connection = conexion,
+                    CommandText = "ns_orders..sp_quotes",
+                    CommandType = CommandType.StoredProcedure,
+                    CommandTimeout = 0,
+                };
+
+                comando.Parameters.AddWithValue("i_accion", "S2");
+                comando.Parameters.AddWithValue("i_quote", quote);
+
+                comando.ExecuteNonQuery();
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = comando;
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                adapter.Fill(ds, "quotes");
+                adapter.Dispose();
+
+
+
+                conexion.Close();
+
+
+            }
+            catch (Exception)
+            {
+
+
+            }
+
+            return ds;
+        }
     }
 }

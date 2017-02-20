@@ -22,5 +22,16 @@ namespace NS_OrdersSystem.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-APK6QOP\\HTTSERVER;Initial Catalog=ns_orders;Persist Security " +
+            "Info=True;User ID=HTTUser;Password=123456")]
+        public string ns_ordersConnectionString {
+            get {
+                return ((string)(this["ns_ordersConnectionString"]));
+            }
+        }
     }
 }

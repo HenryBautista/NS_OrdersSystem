@@ -17,6 +17,9 @@ using MahApps.Metro.Controls.Dialogs;
 using System.Threading.Tasks;
 using NS_OrdersSystem.Views;
 using NS_OrdersSystem.Data;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
+
 namespace NS_OrdersSystem
 {
     /// <summary>
@@ -28,6 +31,8 @@ namespace NS_OrdersSystem
         {
             InitializeComponent();
         }
+
+        
 
         private void PassWordBoxPass_KeyDown(object sender, KeyEventArgs e)
         {

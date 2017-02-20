@@ -24,3 +24,7 @@ C:\Users\Henry\Documents\Code Proyects\NS_OrdersSystem\NS_OrdersSystem\obj\Relea
 C:\Users\Henry\Documents\Code Proyects\NS_OrdersSystem\NS_OrdersSystem\obj\Release\NS_OrdersSystem.exe
 C:\Users\Henry\Documents\Code Proyects\NS_OrdersSystem\NS_OrdersSystem\obj\Release\NS_OrdersSystem.pdb
 C:\Users\Henry\Documents\Code Proyects\NS_OrdersSystem\NS_OrdersSystem\obj\Release\NS_OrdersSystem.csprojResolveAssemblyReference.cache
+C:\Users\Henry\Documents\Code Proyects\NS_OrdersSystem\NS_OrdersSystem\obj\Release\Window1.baml
+C:\Users\Henry\Documents\Code Proyects\NS_OrdersSystem\NS_OrdersSystem\obj\Release\Window1.g.cs
+C:\Users\Henry\Documents\Code Proyects\NS_OrdersSystem\NS_OrdersSystem\bin\Release\EntityFramework.dll
+C:\Users\Henry\Documents\Code Proyects\NS_OrdersSystem\NS_OrdersSystem\bin\Release\EntityFramework.xml

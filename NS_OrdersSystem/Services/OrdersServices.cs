@@ -31,7 +31,11 @@ namespace NS_OrdersSystem.Services
                 };
 
                 comando.Parameters.AddWithValue("i_accion", "I1");
-                comando.Parameters.AddWithValue("i_date", date);
+                //string time = date.ToString();
+                //time = time.Substring(0, 10);
+                //time = time + " " + DateTime.Now.TimeOfDay;
+                //comando.Parameters.AddWithValue("i_date", DateTime.Parse(time));
+                comando.Parameters.AddWithValue("i_date",date);
                 comando.Parameters.AddWithValue("i_client_name",p1.ToUpper() );
                 comando.Parameters.AddWithValue("i_phone",p2);
                 comando.Parameters.AddWithValue("i_product_description",p3.ToUpper() );
@@ -252,6 +256,49 @@ namespace NS_OrdersSystem.Services
         internal static void InsertQuote(DateTime? date, string p1, string p2, string p3, string p4, string p5)
         {
             throw new NotImplementedException();
+        }
+
+
+        internal static DataSet1 FindThisOrderToReport(string order)
+        {
+
+            DataSet1 ds = new DataSet1();
+            try
+            {
+                SqlConnection conexion = new SqlConnection(DBManager.sqlConnectionString);
+                conexion.Open();
+                SqlCommand comando = new SqlCommand
+                {
+                    Connection = conexion,
+                    CommandText = "ns_orders..sp_orders",
+                    CommandType = CommandType.StoredProcedure,
+                    CommandTimeout = 0,
+                };
+
+                comando.Parameters.AddWithValue("i_accion", "S2");
+                comando.Parameters.AddWithValue("i_order",order);
+
+                comando.ExecuteNonQuery();
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = comando;
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                adapter.Fill(ds,"orders");
+                adapter.Dispose();
+
+
+
+                conexion.Close();
+
+
+            }
+            catch (Exception)
+            {
+
+
+            }
+
+            return ds;
         }
     }
 }

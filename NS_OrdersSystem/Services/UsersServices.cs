@@ -46,7 +46,7 @@ namespace NS_OrdersSystem.Services
             catch (Exception)
             {
 
-                throw;
+               
             }
              
             return flag;

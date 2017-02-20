@@ -222,6 +222,7 @@ namespace NS_OrdersSystem.Views
             {
             DataRowView r = (DataRowView)DataGridOrders.SelectedItem;
             currentItemSelected =int.Parse(r["or_order"].ToString());
+            Data.SessionData.selectedToReport = currentItemSelected.ToString();
             fillSpacesOrder();
             calcMoney();
             if (!isMaster)
@@ -389,6 +390,7 @@ namespace NS_OrdersSystem.Views
             {
                 DataRowView r = (DataRowView)DataGridQuotes.SelectedItem;
                 currentItemSelectedCoti = int.Parse(r["qu_quote"].ToString());
+                SessionData.selectedQuoteToReport = currentItemSelectedCoti.ToString();
                 fillSpacesQuote();
                 if (!isMaster)
                 {
@@ -486,6 +488,18 @@ namespace NS_OrdersSystem.Views
         private void ButtonShowAllCoti_Click(object sender, RoutedEventArgs e)
         {
             ShowAllQuotes();
+        }
+
+        private void ButtonPrint_Click(object sender, RoutedEventArgs e)
+        {
+            Window1 a = new Window1();
+            a.Show();
+        }
+
+        private void ButtonReportCoti_Click(object sender, RoutedEventArgs e)
+        {
+            QuoteReportWindow a = new QuoteReportWindow();
+            a.Show();
         }
 
     }

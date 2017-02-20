@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ns_ordersModelStoreContainer" CdmEntityContainer="ns_ordersEntities">
+    <EntitySetMapping Name="orders">
+      <EntityTypeMapping TypeName="ns_ordersModel.order">
+        <MappingFragment StoreEntitySet="orders">
+          <ScalarProperty Name="or_order" ColumnName="or_order" />
+          <ScalarProperty Name="or_date" ColumnName="or_date" />
+          <ScalarProperty Name="or_client_name" ColumnName="or_client_name" />
+          <ScalarProperty Name="or_phone" ColumnName="or_phone" />
+          <ScalarProperty Name="or_product_description" ColumnName="or_product_description" />
+          <ScalarProperty Name="or_price" ColumnName="or_price" />
+          <ScalarProperty Name="or_anticipe" ColumnName="or_anticipe" />
+          <ScalarProperty Name="or_observation" ColumnName="or_observation" />
+          <ScalarProperty Name="or_state" ColumnName="or_state" />
+          <ScalarProperty Name="or_user_owner" ColumnName="or_user_owner" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="quotes">
+      <EntityTypeMapping TypeName="ns_ordersModel.quote">
+        <MappingFragment StoreEntitySet="quotes">
+          <ScalarProperty Name="qu_quote" ColumnName="qu_quote" />
+          <ScalarProperty Name="qu_date" ColumnName="qu_date" />
+          <ScalarProperty Name="qu_client_name" ColumnName="qu_client_name" />
+          <ScalarProperty Name="qu_phone" ColumnName="qu_phone" />
+          <ScalarProperty Name="qu_detail" ColumnName="qu_detail" />
+          <ScalarProperty Name="qu_price" ColumnName="qu_price" />
+          <ScalarProperty Name="qu_supplier" ColumnName="qu_supplier" />
+          <ScalarProperty Name="qu_user_owner" ColumnName="qu_user_owner" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="ns_ordersModel.user">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="us_user" ColumnName="us_user" />
+          <ScalarProperty Name="us_login" ColumnName="us_login" />
+          <ScalarProperty Name="us_name" ColumnName="us_name" />
+          <ScalarProperty Name="us_paterno" ColumnName="us_paterno" />
+          <ScalarProperty Name="us_materno" ColumnName="us_materno" />
+          <ScalarProperty Name="us_password" ColumnName="us_password" />
+          <ScalarProperty Name="us_master" ColumnName="us_master" />
+          <ScalarProperty Name="us_enable" ColumnName="us_enable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_orders" FunctionName="ns_ordersModel.Store.sp_orders">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ns_ordersModel.sp_orders_Result">
+          <ScalarProperty Name="or_order" ColumnName="or_order" />
+          <ScalarProperty Name="or_date" ColumnName="or_date" />
+          <ScalarProperty Name="or_client_name" ColumnName="or_client_name" />
+          <ScalarProperty Name="or_phone" ColumnName="or_phone" />
+          <ScalarProperty Name="or_product_description" ColumnName="or_product_description" />
+          <ScalarProperty Name="or_price" ColumnName="or_price" />
+          <ScalarProperty Name="or_anticipe" ColumnName="or_anticipe" />
+          <ScalarProperty Name="or_observation" ColumnName="or_observation" />
+          <ScalarProperty Name="or_state" ColumnName="or_state" />
+          <ScalarProperty Name="or_user_owner" ColumnName="or_user_owner" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_quotes" FunctionName="ns_ordersModel.Store.sp_quotes">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ns_ordersModel.sp_quotes_Result">
+          <ScalarProperty Name="qu_quote" ColumnName="qu_quote" />
+          <ScalarProperty Name="qu_date" ColumnName="qu_date" />
+          <ScalarProperty Name="qu_client_name" ColumnName="qu_client_name" />
+          <ScalarProperty Name="qu_phone" ColumnName="qu_phone" />
+          <ScalarProperty Name="qu_detail" ColumnName="qu_detail" />
+          <ScalarProperty Name="qu_price" ColumnName="qu_price" />
+          <ScalarProperty Name="qu_supplier" ColumnName="qu_supplier" />
+          <ScalarProperty Name="qu_user_owner" ColumnName="qu_user_owner" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_users" FunctionName="ns_ordersModel.Store.sp_users">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ns_ordersModel.sp_users_Result">
+          <ScalarProperty Name="us_user" ColumnName="us_user" />
+          <ScalarProperty Name="us_login" ColumnName="us_login" />
+          <ScalarProperty Name="us_name" ColumnName="us_name" />
+          <ScalarProperty Name="us_paterno" ColumnName="us_paterno" />
+          <ScalarProperty Name="us_materno" ColumnName="us_materno" />
+          <ScalarProperty Name="us_password" ColumnName="us_password" />
+          <ScalarProperty Name="us_master" ColumnName="us_master" />
+          <ScalarProperty Name="us_enable" ColumnName="us_enable" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

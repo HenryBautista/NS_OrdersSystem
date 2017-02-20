@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Henry\Documents\Code Proyects\NS_OrdersSystem\NS_OrdersSystem\App.xaml
-31221665616
+51141421
 
-15-1594006558
-141568370698
-MainWindow.xaml;Views\OrderView.xaml;Views\UserView.xaml;
+302144992797
+281071192184
+MainWindow.xaml;QuoteReportWindow.xaml;Views\OrderView.xaml;Views\UserView.xaml;Window1.xaml;
 
 False
 

@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ns_ordersModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="order">
+    <Key>
+      <PropertyRef Name="or_order" />
+    </Key>
+    <Property Name="or_order" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="or_date" Type="DateTime" Precision="0" />
+    <Property Name="or_client_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="or_phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="or_product_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="or_price" Type="Double" />
+    <Property Name="or_anticipe" Type="Double" />
+    <Property Name="or_observation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="or_state" Type="Boolean" />
+    <Property Name="or_user_owner" Type="Int32" />
+    <NavigationProperty Name="user" Relationship="Self.FK__orders__or_user___38996AB5" FromRole="orders" ToRole="users" />
+  </EntityType>
+  <EntityType Name="quote">
+    <Key>
+      <PropertyRef Name="qu_quote" />
+    </Key>
+    <Property Name="qu_quote" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="qu_date" Type="DateTime" Precision="0" />
+    <Property Name="qu_client_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="qu_phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="qu_detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="qu_price" Type="Double" />
+    <Property Name="qu_supplier" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="qu_user_owner" Type="Int32" />
+    <NavigationProperty Name="user" Relationship="Self.FK__quotes__qu_user___4CA06362" FromRole="quotes" ToRole="users" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="us_user" />
+    </Key>
+    <Property Name="us_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="us_login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="us_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="us_paterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="us_materno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="us_password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="us_master" Type="Boolean" />
+    <Property Name="us_enable" Type="Boolean" />
+    <NavigationProperty Name="orders" Relationship="Self.FK__orders__or_user___38996AB5" FromRole="users" ToRole="orders" />
+    <NavigationProperty Name="quotes" Relationship="Self.FK__quotes__qu_user___4CA06362" FromRole="users" ToRole="quotes" />
+  </EntityType>
+  <Association Name="FK__orders__or_user___38996AB5">
+    <End Role="users" Type="Self.user" Multiplicity="0..1" />
+    <End Role="orders" Type="Self.order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="us_user" />
+      </Principal>
+      <Dependent Role="orders">
+        <PropertyRef Name="or_user_owner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__quotes__qu_user___4CA06362">
+    <End Role="users" Type="Self.user" Multiplicity="0..1" />
+    <End Role="quotes" Type="Self.quote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="us_user" />
+      </Principal>
+      <Dependent Role="quotes">
+        <PropertyRef Name="qu_user_owner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ns_ordersEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="orders" EntityType="Self.order" />
+    <EntitySet Name="quotes" EntityType="Self.quote" />
+    <EntitySet Name="users" EntityType="Self.user" />
+    <AssociationSet Name="FK__orders__or_user___38996AB5" Association="Self.FK__orders__or_user___38996AB5">
+      <End Role="users" EntitySet="users" />
+      <End Role="orders" EntitySet="orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__quotes__qu_user___4CA06362" Association="Self.FK__quotes__qu_user___4CA06362">
+      <End Role="users" EntitySet="users" />
+      <End Role="quotes" EntitySet="quotes" />
+    </AssociationSet>
+    <FunctionImport Name="sp_orders" ReturnType="Collection(ns_ordersModel.sp_orders_Result)">
+      <Parameter Name="i_accion" Mode="In" Type="String" />
+      <Parameter Name="i_order" Mode="In" Type="Int32" />
+      <Parameter Name="i_date" Mode="In" Type="DateTime" />
+      <Parameter Name="i_client_name" Mode="In" Type="String" />
+      <Parameter Name="i_phone" Mode="In" Type="String" />
+      <Parameter Name="i_product_description" Mode="In" Type="String" />
+      <Parameter Name="i_price" Mode="In" Type="Double" />
+      <Parameter Name="i_anticipe" Mode="In" Type="Double" />
+      <Parameter Name="i_observation" Mode="In" Type="String" />
+      <Parameter Name="i_state" Mode="In" Type="Boolean" />
+      <Parameter Name="i_user_owner" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_quotes" ReturnType="Collection(ns_ordersModel.sp_quotes_Result)">
+      <Parameter Name="i_accion" Mode="In" Type="String" />
+      <Parameter Name="i_quote" Mode="In" Type="Int32" />
+      <Parameter Name="i_date" Mode="In" Type="DateTime" />
+      <Parameter Name="i_client_name" Mode="In" Type="String" />
+      <Parameter Name="i_phone" Mode="In" Type="String" />
+      <Parameter Name="i_detail" Mode="In" Type="String" />
+      <Parameter Name="i_price" Mode="In" Type="Double" />
+      <Parameter Name="i_supplier" Mode="In" Type="String" />
+      <Parameter Name="i_user_owner" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_users" ReturnType="Collection(ns_ordersModel.sp_users_Result)">
+      <Parameter Name="i_accion" Mode="In" Type="String" />
+      <Parameter Name="i_user" Mode="In" Type="Int32" />
+      <Parameter Name="i_login" Mode="In" Type="String" />
+      <Parameter Name="i_name" Mode="In" Type="String" />
+      <Parameter Name="i_paterno" Mode="In" Type="String" />
+      <Parameter Name="i_materno" Mode="In" Type="String" />
+      <Parameter Name="i_password" Mode="In" Type="String" />
+      <Parameter Name="i_master" Mode="In" Type="Boolean" />
+      <Parameter Name="i_enable" Mode="In" Type="Boolean" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="sp_orders_Result">
+    <Property Type="Int32" Name="or_order" Nullable="false" />
+    <Property Type="DateTime" Name="or_date" Nullable="true" />
+    <Property Type="String" Name="or_client_name" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="or_phone" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="or_product_description" Nullable="true" />
+    <Property Type="Double" Name="or_price" Nullable="true" />
+    <Property Type="Double" Name="or_anticipe" Nullable="true" />
+    <Property Type="String" Name="or_observation" Nullable="true" />
+    <Property Type="Boolean" Name="or_state" Nullable="true" />
+    <Property Type="Int32" Name="or_user_owner" Nullable="true" />
+    <Property Type="String" Name="name" Nullable="true" MaxLength="101" />
+  </ComplexType>
+  <ComplexType Name="sp_quotes_Result">
+    <Property Type="Int32" Name="qu_quote" Nullable="false" />
+    <Property Type="DateTime" Name="qu_date" Nullable="true" />
+    <Property Type="String" Name="qu_client_name" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="qu_phone" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="qu_detail" Nullable="true" />
+    <Property Type="Double" Name="qu_price" Nullable="true" />
+    <Property Type="String" Name="qu_supplier" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="qu_user_owner" Nullable="true" />
+    <Property Type="String" Name="name" Nullable="true" MaxLength="101" />
+  </ComplexType>
+  <ComplexType Name="sp_users_Result">
+    <Property Type="Int32" Name="us_user" Nullable="false" />
+    <Property Type="String" Name="us_login" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="us_name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="us_paterno" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="us_materno" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="us_password" Nullable="true" MaxLength="20" />
+    <Property Type="Boolean" Name="us_master" Nullable="true" />
+    <Property Type="Boolean" Name="us_enable" Nullable="true" />
+  </ComplexType>
+</Schema>
