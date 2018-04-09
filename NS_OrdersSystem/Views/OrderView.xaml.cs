@@ -83,7 +83,7 @@ namespace NS_OrdersSystem.Views
                 
                
             //}
-            
+            //check changes Loquillas
         }
 
         private void calcMoney()
